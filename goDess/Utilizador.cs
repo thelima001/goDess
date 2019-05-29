@@ -7,26 +7,68 @@ namespace goDess
 {
     public class Utilizador
     {
-        public string Email { get; set; }
-        public string Pass { get; set; }
-        public string Morada { get; set; }
-        public string Nome { get; set; }
+        private string Email { get; set; }
+        private string Pass { get; set; }
+        private string Morada { get; set; }
+        private string Nome { get; set; }
         private int id {get; set;}
-        private List<Ingrediente> ingredientes { get; set; }
-        private List<Receita> receitas { get; set; }
+        private List<int> excluidos { get; set; }
+        private List<int> favoritos { get; set; }
         private Calendario c {get; set;}
+        private List<int> dietas {get; set;}
 
 
 
-        public Utilizador(string email, string pass, string morada, string nome, List<Ingrediente> ingredientes, List<Receita> receitas, Calendario c)
+        public Utilizador(string email, string pass, string morada, string nome, List<int> ingredientes, List<int> receitas, Calendario c,List<int> dietas)
         {
             Email = email;
             Pass = pass;
             Morada = morada;
             Nome = nome;
-            this.ingredientes = ingredientes;
-            this.receitas = receitas;
+            this.excluidos = ingredientes;
+            this.favoritos = receitas;
+            this.dietas = dietas;
             this.c = c;
         }
+
+        //adicionar uma receita aos favoritos
+        public void addFavorito(int receita) {
+            this.favoritos.Add(receita);
+        }
+
+        //remover receita dos favoritos
+        public void removeFavorito(int receita) {
+            this.favoritos.Remove(receita);
+        }
+
+        //adicionar um ingrediente aos excluidos
+        public void addExcluido(int ingrediente) {
+            this.excluidos.Add(ingrediente);
+        }
+        //remover ingrediente dos exluidos
+        public void removeFavorito(int ingrediente) {
+            this.excluidos.Remove(ingrediente);
+        }
+
+        //adicionar dieta
+        public void addDieta(int dieta) {
+            this.dietas.Add(dieta);
+        }
+        //remover uma dieta das dietas
+        public void removeDieta(int dieta) {
+            this.dietas.Remove(dieta);
+        }
+
+
+        public void limparExluidos() {
+            this.excluidos = new List<int>();
+        }
+        public void limparFavoritos() {
+            this.favoritos = new List<int>();
+        }
+        public void limpardietas() {
+            this.dietas = new List<int>();
+        }
+
     }
 }
