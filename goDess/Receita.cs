@@ -11,9 +11,10 @@ namespace goDess
         public string Categoria { get; set; }
         private int id {get; set;}
         private List<Ingrediente> ingredientes {get; set;}
-        private List<Instrucao> instrucoes {get; set;}
+       // private List<Instrucao> instrucoes {get; set;}
+       private string instrucoes;
 
-        public Receita (string nome, string categoria, List<Ingrediente> ingredientes, List<Instrucao> instrucoes)
+        public Receita (string nome, string categoria, List<Ingrediente> ingredientes, string instrucoes)
         {
             Nome = nome;
             Categoria = categoria;
