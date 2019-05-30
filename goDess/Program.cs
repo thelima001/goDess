@@ -12,8 +12,17 @@ namespace goDess
 {
     public class Program
     {
+
+        private static Conj_Utilizadores users = new Conj_Utilizadores();
+        private static Conj_Receitas receitas = new Conj_Receitas();
+        private static Conj_Dietas dietas = new Conj_Dietas();
+
+
         public static void Main(string[] args)
         {
+            List<int> favs = users.getfavoritos(1); 
+            Console.Write(favs);
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

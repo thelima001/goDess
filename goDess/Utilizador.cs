@@ -46,7 +46,7 @@ namespace goDess
             this.excluidos.Add(ingrediente);
         }
         //remover ingrediente dos exluidos
-        public void removeFavorito(int ingrediente) {
+        public void removeExcluido(int ingrediente) {
             this.excluidos.Remove(ingrediente);
         }
 

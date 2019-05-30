@@ -19,4 +19,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\Users\João Nuno\Downloads\MySql.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

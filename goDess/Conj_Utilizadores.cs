@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using MySql.Data.MySqlClient;
 
 namespace goDess
@@ -7,11 +8,11 @@ namespace goDess
     public class Conj_Utilizadores
     {
         private string connectionstr = "server=localhost;user id=root;database=mydb;persistsecurityinfo=True;allowuservariables=True";
-        private MySqlConnection conn = new MySqlConnection(connectionstr);
+        private MySqlConnection conn;
 
         public Conj_Utilizadores()
         {
-
+            conn = new MySqlConnection(connectionstr);
         }
 
         public void add(Utilizador u)
@@ -21,31 +22,36 @@ namespace goDess
 
         public Boolean contains(Utilizador u)
         {
-            return receitas.ContainsKey(u.getid());
+            return true;
         }
 
         public Utilizador get(int id)
         {
-            return utilizadores[id];
+            return null;
         }
         public List<int> getfavoritos (int id) {
 
             List<int> res = new List<int>();
-            connection();
-            MySqlCommand cmd = new MySqlCommand("FavoritosUser", conn);
-            cmd.CommandType = CommandType.StoredProcedure;
- 
-            MySqlDataAdapter sd = new MySqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
- 
             conn.Open();
-            sd.Fill(dt);
-            conn.Close();
- 
-            foreach(DataRow dr in dt.Rows)
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = conn;
+            
+            cmd.CommandText = "CREATE PROCEDURE `FavoritosUser`(Util int(11)) " +
+                "BEGIN select favoritos.receita from favoritos join utilizador on favoritos.utilizador = Utilizador.IdUtilizador" +
+                "where favoritos.utilizador = Util;" +
+                "END";
+            cmd.Prepare();
+
+            cmd.Parameters.AddWithValue("Util", id);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
             {
-                res.Add(dr["Receita"]);
+                res.Add(Convert.ToInt32(reader["Receita"]));
             }
+
             return res;
         }
     }
