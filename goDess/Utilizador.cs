@@ -10,13 +10,19 @@ namespace goDess
         private string Email { get; set; }
         private string Pass { get; set; }
         private string Morada { get; set; }
-        private string Nome { get; set; }
+        public string Nome { get; set; }
         private int id {get; set;}
         private List<int> excluidos { get; set; }
         private List<int> favoritos { get; set; }
         private Calendario c {get; set;}
         private List<int> dietas {get; set;}
 
+        public Utilizador(int id, string nome, string email, string morada) {
+            this.id = id;
+            this.Nome = nome;
+            this.Email = email;
+            this.Morada = morada;
+}                                                                 
 
 
         public Utilizador(string email, string pass, string morada, string nome, List<int> ingredientes, List<int> receitas, Calendario c,List<int> dietas)

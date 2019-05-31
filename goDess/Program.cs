@@ -20,10 +20,11 @@ namespace goDess
 
         public static void Main(string[] args)
         {
-            List<int> favs = users.getfavoritos(1); 
-            Console.Write(favs);
+            Utilizador u = users.get(2);
+            if (u != null) Console.Write(u.Nome);
+            else Console.Write("ola");
 
-            CreateWebHostBuilder(args).Build().Run();
+            //CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

@@ -7,12 +7,12 @@ namespace goDess
 {
     public class Conj_Utilizadores
     {
-        private string connectionstr = "server=localhost;user id=root;database=mydb;persistsecurityinfo=True;allowuservariables=True";
-        private MySqlConnection conn;
+        private static string connectionstr = "server=localhost;user id=root;database=mydb;persistsecurityinfo=True;allowuservariables=True";
+        private MySqlConnection conn = new MySqlConnection(connectionstr);
 
         public Conj_Utilizadores()
         {
-            conn = new MySqlConnection(connectionstr);
+            
         }
 
         public void add(Utilizador u)
@@ -25,9 +25,43 @@ namespace goDess
             return true;
         }
 
-        public Utilizador get(int id)
+        public Utilizador get(int id) 
         {
-            return null;
+            Utilizador res = null;
+
+            try {
+            MySqlParameter[] pms = new MySqlParameter[1];
+            pms[0] = new MySqlParameter("Id",MySqlDbType.Int24);
+            pms[0].Value = id;
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
+                try
+                {
+                    conn.Open();
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.CommandText = "get_user";
+                    cmd.Parameters.AddRange(pms);
+
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    string nome = "", email = "", morada = "";
+                    while (reader.Read())
+                    {
+                        nome = (string)reader["Nome"];
+                        email = (string)reader["Email"];
+                        morada = (string)reader["Morada"];
+                    }
+
+                    res = new Utilizador(id, nome, email, morada);
+                    conn.Close();
+                }
+                catch (System.NotSupportedException) { }
+          
+           
+                } catch(MySqlException){}
+            return res;
+
+
         }
         public List<int> getfavoritos (int id) {
 
