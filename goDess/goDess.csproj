@@ -17,11 +17,12 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="MySql.Data" Version="8.0.16" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\Users\João Nuno\Downloads\MySql.Data.dll</HintPath>
+      <HintPath>..\..\Windows\SysWOW64\MySql.Data.DLL</HintPath>
     </Reference>
   </ItemGroup>
 

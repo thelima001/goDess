@@ -10,7 +10,7 @@ namespace goDess
         private string Email { get; set; }
         private string Pass { get; set; }
         private string Morada { get; set; }
-        public string Nome { get; set; }
+        private string Nome { get; set; }
         private int id {get; set;}
         private List<int> excluidos { get; set; }
         private List<int> favoritos { get; set; }
@@ -75,6 +75,25 @@ namespace goDess
         public void limpardietas() {
             this.dietas = new List<int>();
         }
-
+        public int getid()
+        {
+            return this.id;
+        }
+        public string getnome()
+        {
+            return this.Nome;
+        }
+        public string getemail()
+        {
+            return this.Email;
+        }
+        public string getpass()
+        {
+            return this.Pass;
+        }
+        public string getmorada()
+        {
+            return this.Morada;
+        }
     }
 }

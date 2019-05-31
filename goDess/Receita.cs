@@ -14,6 +14,13 @@ namespace goDess
        // private List<Instrucao> instrucoes {get; set;}
        private string instrucoes;
 
+        public Receita(int id, string nome, int categoria, string instrucoes)
+        {
+            this.id = id;
+            this.Nome = nome;
+            this.Categoria = categoria;
+            this.instrucoes = instrucoes;
+        }
         public Receita (string nome, string categoria, List<Ingrediente> ingredientes, string instrucoes)
         {
             Nome = nome;
@@ -21,6 +28,17 @@ namespace goDess
             this.ingredientes = ingredientes;
             this.instrucoes = instrucoes;   
         }
-
+        public int getid()
+        {
+            return id;
+        }
+        public string getnome()
+        {
+            return Nome;
+        }
+        public string getinstrucoes()
+        {
+            return instrucoes;
+        }
     }
 }
