@@ -384,7 +384,28 @@ namespace goDess
             else return new Ingrediente(id,nome);
         }
 
+        public int contains_ingrediente(string nome) //retorna -1 se nao houver
+        {
+            MySqlParameter[] pms = new MySqlParameter[1];
+            pms[0] = new MySqlParameter("nnome", MySqlDbType.String);
+            pms[0].Value = nome;
 
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
+            conn.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "get_ingrediente_id";
+            cmd.Parameters.AddRange(pms);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+            int id = -1;
+            while (reader.Read())
+            {
+                id = (int)reader["id"];
+            }
+            conn.Close();
+            return id;
+        }
 
     }
 }
