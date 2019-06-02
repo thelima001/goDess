@@ -10,7 +10,7 @@ namespace goDess
         private string Nome { get; set; }
 
         private int Id { get; set; }
-        private Ingrediente(string nome, int id)
+        public Ingrediente(int id,string nome)
         {
             Nome = nome;
             Id = id;

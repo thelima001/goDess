@@ -14,13 +14,20 @@ namespace goDess
             conn = new MySqlConnection(connectionstr);
         }
 
-        public void add(Dieta d)
+
+
+
+
+
+
+
+        //////////////////////////////geral dietas //////////////////////////////////////
+
+        public int add(Dieta d)
         {
-            MySqlParameter[] pms = new MySqlParameter[2];
-            pms[0] = new MySqlParameter("nid", MySqlDbType.Int24);
-            pms[0].Value = d.getid();
-            pms[1] = new MySqlParameter("nnome", MySqlDbType.String);
-            pms[1].Value = d.getnome();
+            MySqlParameter[] pms = new MySqlParameter[1];
+            pms[0] = new MySqlParameter("nnome", MySqlDbType.String);
+            pms[0].Value = d.getnome();
         
 
             MySqlCommand cmd = new MySqlCommand();
@@ -32,6 +39,17 @@ namespace goDess
 
             cmd.ExecuteNonQuery();
             conn.Close();
+            conn.Open();
+
+            cmd = new MySqlCommand("last_id", conn);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            reader.Read(); int res = reader.GetInt32(0);
+            conn.Close();
+            return res;
+        }
+        public void update(Dieta d)
+        {
+            if (contains(d.getid())) { remove(d.getid());add(d); }
         }
 
         public Boolean contains(int id)
@@ -70,6 +88,33 @@ namespace goDess
             return res;
         }
 
+        public void remove(int id)
+        {
+            MySqlParameter[] pms = new MySqlParameter[1];
+            pms[0] = new MySqlParameter("ndieta", MySqlDbType.Int24);
+            pms[0].Value = id;
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
+            conn.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "eliminar_dieta";
+            cmd.Parameters.AddRange(pms);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+
+
+
+
+
+
+
+
+        //////////////////////////////receitas cumprem dieta //////////////////////////////////////
+
         public List<int> getReceitas(int id)
         {
             List<int> res = new List<int>();
@@ -98,6 +143,39 @@ namespace goDess
 
             return res;
         }
+        public void remove_receitas(int idd, int idr)
+        {
+            MySqlParameter[] pms = new MySqlParameter[2];
+            pms[0] = new MySqlParameter("ndieta", MySqlDbType.Int24);
+            pms[0].Value = idd;
+            pms[1] = new MySqlParameter("nreceita", MySqlDbType.Int24);
+            pms[1].Value = idr;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
+            conn.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "eliminar_receitas_dieta";
+            cmd.Parameters.AddRange(pms);
 
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+        public void add_receitas(int idd, int idr)
+        {
+            MySqlParameter[] pms = new MySqlParameter[2];
+            pms[0] = new MySqlParameter("ndieta", MySqlDbType.Int24);
+            pms[0].Value = idd;
+            pms[1] = new MySqlParameter("nreceita", MySqlDbType.Int24);
+            pms[1].Value = idr;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = conn;
+            conn.Open();
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandText = "add_receitas_dieta";
+            cmd.Parameters.AddRange(pms);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
     }
 }

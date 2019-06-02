@@ -16,6 +16,7 @@ namespace goDess
         private List<int> favoritos { get; set; }
         private Calendario c {get; set;}
         private List<int> dietas {get; set;}
+        private Calendario calendario;
 
         public Utilizador(int id, string nome, string email, string morada) {
             this.id = id;

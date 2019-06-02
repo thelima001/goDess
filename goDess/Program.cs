@@ -20,13 +20,13 @@ namespace goDess
 
         public static void Main(string[] args)
         {
-            /*
-            Utilizador u = users.get(2);
-            if (u != null) Console.Write(u.Nome);
-            else Console.Write("ola");
             
-            List<int> lista = users.getfavoritos(5);
-            foreach (int x in lista) Console.Write(x);*/
+            Utilizador u = users.get(2);
+            /*if (u != null) Console.Write(u.getnome());
+            else Console.Write("ola");*/
+            Receita r = new Receita("ola", "Mousse", null, "123");
+            int x = receitas.add(r);
+            Console.Write("DDDDDDD " + x);
 
            
             CreateWebHostBuilder(args).Build().Run();

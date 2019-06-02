@@ -8,13 +8,12 @@ namespace goDess
     public class Receita
     {
         public string Nome { get; set; }
-        public int Categoria { get; set; }
+        public string Categoria { get; set; }
         private int id {get; set;}
         private List<Ingrediente> ingredientes {get; set;}
-       // private List<Instrucao> instrucoes {get; set;}
        private string instrucoes;
 
-        public Receita(int id, string nome, int categoria, string instrucoes)
+        public Receita(int id, string nome, string categoria, string instrucoes)
         {
             this.id = id;
             this.Nome = nome;
@@ -39,6 +38,10 @@ namespace goDess
         public string getinstrucoes()
         {
             return instrucoes;
+        }
+        public string getcategoria()
+        {
+            return Categoria;
         }
     }
 }
